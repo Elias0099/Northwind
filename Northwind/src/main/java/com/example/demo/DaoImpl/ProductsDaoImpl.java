@@ -51,8 +51,10 @@ public class ProductsDaoImpl implements Operaciones<Products> {
 	@Override
 	public List<Map<String, Object>> readAll2() {
 		// TODO Auto-generated method stub
-		String SQL = "SELECT p.ProductID \"ProductoId\",p.ProductName \"Nombre\", c.CategoryID \"CategoriaId\", p.QuantityPerUnit \"Cantidad por Unidad\", p.UnitsInStock \"Unidades en Stock\"\r\n"
-				+ "from products as p join categories as c on p.CategoryID=c.CategoryID;";
+		String SQL = "SELECT p.ProductID \"ProductoId\",p.ProductName \"Nombre\", count(*) as cantidad, c.CategoryName \"Categoria\", p.QuantityPerUnit \"Cantidad por Unidad\", p.UnitsInStock \"Unidades en Stock\"\r\n"
+				+ "from products as p join categories as c on p.CategoryID=c.CategoryID\r\n"
+				+ "group by CategoryName\r\n"
+				+ ";";
 		return jdbcTemplate.queryForList(SQL);
 	}
 

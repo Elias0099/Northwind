@@ -51,7 +51,9 @@ public class OrdersDaoImpl implements Operaciones<Orders>{
 	@Override
 	public List<Map<String, Object>> readAll2() {
 		// TODO Auto-generated method stub
-		String SQL = "SELECT o.OrderID, o.ShipName, o.ShipAddress, o.ShipPostalCode, o.ShipCountry from orders as o;";
+		String SQL = "select o.ShipCountry , count(*) as cantidad\r\n"
+				+ "    from orders as o\r\n"
+				+ "group by ShipCountry;";
 		return jdbcTemplate.queryForList(SQL);
 	}
 
